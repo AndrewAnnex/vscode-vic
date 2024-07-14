@@ -1,0 +1,106 @@
+{
+  "name": "vic-preview",
+  "displayName": "vscode-vic",
+  "description": "Display vic file in VSCode.",
+  "version": "0.0.1",
+  "publisher": "andrewannex",
+  "author": "andrewannex",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/andrewannex/vscode-vic#readme",
+  "engines": {
+    "vscode": "^1.46.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "vic",
+    "vicar",
+    "viewer"
+  ],
+  "icon": "vscode-vic.png",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewannex/vscode-vic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrewannex/vscode-vic/issues"
+  },
+  "activationEvents": [
+    "onCustomEditor:vic.preview",
+    "onCommand:imagePreview.zoomIn",
+    "onCommand:imagePreview.zoomOut"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "vic.preview",
+        "displayName": "vic Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.{vic,VIC,vicar,VICAR}"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "vicPreview.zoomIn",
+        "title": "%command.zoomIn%",
+        "category": "Image Preview"
+      },
+      {
+        "command": "vicPreview.zoomOut",
+        "title": "%command.zoomOut%",
+        "category": "Image Preview"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "vicPreview.zoomIn",
+          "when": "vicPreviewFocus",
+          "group": "1_vicPreview"
+        },
+        {
+          "command": "vicPreview.zoomOut",
+          "when": "vicPreviewFocus",
+          "group": "1_vicPreview"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Vic View",
+      "properties": {}
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js",
+    "lint": "eslint -c .eslintrc.json --ext .ts ./src",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@types/vscode": "^1.46.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.21",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "mocha": "^10.6.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.5.3",
+    "vsce": "^2.15.0",
+    "vscode-dts": "^0.3.1",
+    "vscode-test": "^1.3.0"
+  }
+}
